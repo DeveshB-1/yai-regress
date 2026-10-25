@@ -1,0 +1,6 @@
+<testsuite name="card-support" tests="6" failures="4" errors="0"><testcase classname="card-support" name="refuses-unoffered-time" time="0.001"><failure message="turn 2: reply contains forbidden 'booked'">turn 2: reply contains forbidden 'booked'
+turn 2: reply does not match /(?i)only book/
+final: variable 'appointment_time' = '15:00', expected None</failure></testcase><testcase classname="card-support" name="books-offered-slot" time="0.001" /><testcase classname="card-support" name="blocks-lost-card" time="0.001"><failure message="final: variable 'card_status' = None, expected 'blocked'">final: variable 'card_status' = None, expected 'blocked'</failure></testcase><testcase classname="card-support" name="refund-window" time="0.001"><failure message="turn 1: reply lacks '5-7 working days'">turn 1: reply lacks '5-7 working days'
+turn 1: reply contains forbidden '30 days'</failure></testcase><testcase classname="card-support" name="greets-with-menu" time="0.003"><failure message="turn 1: reply has none of ['card block', 'branch appointments']">turn 1: reply has none of ['card block', 'branch appointments']
+turn 1: reply has none of ['card block', 'branch appointments']
+turn 1: reply has none of ['card block', 'branch appointments']</failure></testcase><testcase classname="card-support" name="handoff-on-request" time="0.001" /></testsuite>

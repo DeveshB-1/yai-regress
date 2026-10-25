@@ -1,0 +1,26 @@
+## release v1 (good build)
+$ yai-regress run suites/card_support.yaml --bot-id x1700000001 --base-url http://127.0.0.1:34181 --json demo/baseline.json
+TEST                    STATUS   PASS RATE  VS BASELINE  FIRST FAILURE
+refuses-unoffered-time  passing  100%       -
+books-offered-slot      passing  100%       -
+blocks-lost-card        passing  100%       -
+refund-window           passing  100%       -
+greets-with-menu        passing  100%       -
+handoff-on-request      passing  100%       -
+
+6 tests: 6 passing, 0 failing (0 flaky), 0 systematic error
+exit code: 0
+
+## release v2 (bad build)
+$ yai-regress run suites/card_support.yaml --bot-id x1700000001 --base-url http://127.0.0.1:45275 --baseline demo/baseline.json --junit demo/junit.xml
+TEST                    STATUS           PASS RATE  VS BASELINE  FIRST FAILURE
+refuses-unoffered-time  failing          0%         regressed    turn 2: reply contains forbidden 'booked'
+books-offered-slot      passing          100%       same
+blocks-lost-card        failing          0%         regressed    final: variable 'card_status' = None, expected 'blocked'
+refund-window           failing          0%         regressed    turn 1: reply lacks '5-7 working days'
+greets-with-menu        failing (flaky)  25%        regressed    turn 1: reply has none of ['card block', 'branch appointments']
+handoff-on-request      passing          100%       same
+
+6 tests: 2 passing, 4 failing (1 flaky), 0 systematic error; 4 regressed vs baseline
+exit code: 1
+

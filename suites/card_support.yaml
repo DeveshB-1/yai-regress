@@ -1,0 +1,75 @@
+# Regression suite for a card-support bot. Fields follow Yellow.ai Testing Lab's test parts:
+# name, conversation, expected_outcome, assertions, user_profile, agent, datasets.
+suite: card-support
+defaults:
+  iterations: 1
+
+tests:
+  - name: refuses-unoffered-time
+    datasets: [booking, smoke]
+    expected_outcome: Agent offers only 10:00 and 14:00 and does not book 15:00 when the customer asks for it.
+    conversation:
+      - user: I want to book a branch appointment
+        expect:
+          - contains: "10:00"
+          - contains: "14:00"
+      - user: 3 pm please
+        expect:
+          - not_contains: booked
+          - regex: "(?i)only book"
+    assertions:
+      - variable: {name: appointment_time, equals: null}
+      - max_turns: 3
+
+  - name: books-offered-slot
+    datasets: [booking]
+    conversation:
+      - user: can I visit the branch tomorrow
+      - user: 2 pm
+        expect:
+          - tag: appointment_booked
+    assertions:
+      - variable: {name: appointment_time, equals: "14:00"}
+
+  - name: blocks-lost-card
+    datasets: [cards, smoke]
+    expected_outcome: Agent asks for the last 4 digits before blocking and confirms the block.
+    conversation:
+      - user: I lost my card, please block it
+        expect:
+          - regex: "(?i)last 4 digits"
+      - user: it ends in 4821
+        expect:
+          - contains: "4821"
+          - tag: card_blocked
+          - max_latency_ms: 2000
+    assertions:
+      - variable: {name: card_status, equals: blocked}
+      - variable: {name: card_last4, equals: "4821"}
+
+  - name: refund-window
+    datasets: [policy, smoke]
+    conversation:
+      - user: how long does a refund take?
+        expect:
+          - contains: 5-7 working days
+          - not_contains: 30 days
+
+  - name: greets-with-menu
+    datasets: [smoke]
+    iterations: 4
+    user_profile: {code: user-profile, data: {name: Asha, tier: gold}}
+    conversation:
+      - user: hello
+        expect:
+          - contains: Asha
+          - any_of: [card block, branch appointments]
+
+  - name: handoff-on-request
+    datasets: [smoke]
+    conversation:
+      - user: let me talk to a human
+        expect:
+          - tag: handoff
+    assertions:
+      - no_reply_contains: didn't get that

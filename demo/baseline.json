@@ -1,0 +1,242 @@
+{
+  "suite": "card-support",
+  "tests": {
+    "refuses-unoffered-time": {
+      "name": "refuses-unoffered-time",
+      "datasets": [
+        "booking",
+        "smoke"
+      ],
+      "status": "passing",
+      "flaky": false,
+      "pass_rate": 1.0,
+      "iterations": [
+        {
+          "status": "passing",
+          "failures": [],
+          "transcript": [
+            {
+              "role": "user",
+              "text": "I want to book a branch appointment"
+            },
+            {
+              "role": "bot",
+              "text": "Tomorrow I have 10:00 or 14:00 open. Which one?"
+            },
+            {
+              "role": "user",
+              "text": "3 pm please"
+            },
+            {
+              "role": "bot",
+              "text": "I can only book 10:00 or 14:00 tomorrow. Which one works?"
+            }
+          ],
+          "judge": "unjudged",
+          "latency_ms": 7.491661031963304
+        }
+      ]
+    },
+    "books-offered-slot": {
+      "name": "books-offered-slot",
+      "datasets": [
+        "booking"
+      ],
+      "status": "passing",
+      "flaky": false,
+      "pass_rate": 1.0,
+      "iterations": [
+        {
+          "status": "passing",
+          "failures": [],
+          "transcript": [
+            {
+              "role": "user",
+              "text": "can I visit the branch tomorrow"
+            },
+            {
+              "role": "bot",
+              "text": "Tomorrow I have 10:00 or 14:00 open. Which one?"
+            },
+            {
+              "role": "user",
+              "text": "2 pm"
+            },
+            {
+              "role": "bot",
+              "text": "Booked. See you at the branch at 14:00 tomorrow."
+            }
+          ],
+          "judge": "unjudged",
+          "latency_ms": 1.2575029977597296
+        }
+      ]
+    },
+    "blocks-lost-card": {
+      "name": "blocks-lost-card",
+      "datasets": [
+        "cards",
+        "smoke"
+      ],
+      "status": "passing",
+      "flaky": false,
+      "pass_rate": 1.0,
+      "iterations": [
+        {
+          "status": "passing",
+          "failures": [],
+          "transcript": [
+            {
+              "role": "user",
+              "text": "I lost my card, please block it"
+            },
+            {
+              "role": "bot",
+              "text": "I can block it right away. What are the last 4 digits of the card?"
+            },
+            {
+              "role": "user",
+              "text": "it ends in 4821"
+            },
+            {
+              "role": "bot",
+              "text": "Done. Your card ending 4821 is blocked. A new card ships in 5 working days."
+            }
+          ],
+          "judge": "unjudged",
+          "latency_ms": 1.2461890000849962
+        }
+      ]
+    },
+    "refund-window": {
+      "name": "refund-window",
+      "datasets": [
+        "policy",
+        "smoke"
+      ],
+      "status": "passing",
+      "flaky": false,
+      "pass_rate": 1.0,
+      "iterations": [
+        {
+          "status": "passing",
+          "failures": [],
+          "transcript": [
+            {
+              "role": "user",
+              "text": "how long does a refund take?"
+            },
+            {
+              "role": "bot",
+              "text": "Refunds reach the source account in 5-7 working days."
+            }
+          ],
+          "judge": "unjudged",
+          "latency_ms": 0.5671160179190338
+        }
+      ]
+    },
+    "greets-with-menu": {
+      "name": "greets-with-menu",
+      "datasets": [
+        "smoke"
+      ],
+      "status": "passing",
+      "flaky": false,
+      "pass_rate": 1.0,
+      "iterations": [
+        {
+          "status": "passing",
+          "failures": [],
+          "transcript": [
+            {
+              "role": "user",
+              "text": "hello"
+            },
+            {
+              "role": "bot",
+              "text": "Hi Asha! I can help with card block, branch appointments and refunds."
+            }
+          ],
+          "judge": "unjudged",
+          "latency_ms": 0.686965009663254
+        },
+        {
+          "status": "passing",
+          "failures": [],
+          "transcript": [
+            {
+              "role": "user",
+              "text": "hello"
+            },
+            {
+              "role": "bot",
+              "text": "Hi Asha! I can help with card block, branch appointments and refunds."
+            }
+          ],
+          "judge": "unjudged",
+          "latency_ms": 1.2960570165887475
+        },
+        {
+          "status": "passing",
+          "failures": [],
+          "transcript": [
+            {
+              "role": "user",
+              "text": "hello"
+            },
+            {
+              "role": "bot",
+              "text": "Hi Asha! I can help with card block, branch appointments and refunds."
+            }
+          ],
+          "judge": "unjudged",
+          "latency_ms": 0.7335490081459284
+        },
+        {
+          "status": "passing",
+          "failures": [],
+          "transcript": [
+            {
+              "role": "user",
+              "text": "hello"
+            },
+            {
+              "role": "bot",
+              "text": "Hi Asha! I can help with card block, branch appointments and refunds."
+            }
+          ],
+          "judge": "unjudged",
+          "latency_ms": 0.5804570100735873
+        }
+      ]
+    },
+    "handoff-on-request": {
+      "name": "handoff-on-request",
+      "datasets": [
+        "smoke"
+      ],
+      "status": "passing",
+      "flaky": false,
+      "pass_rate": 1.0,
+      "iterations": [
+        {
+          "status": "passing",
+          "failures": [],
+          "transcript": [
+            {
+              "role": "user",
+              "text": "let me talk to a human"
+            },
+            {
+              "role": "bot",
+              "text": "Connecting you to a live agent now."
+            }
+          ],
+          "judge": "unjudged",
+          "latency_ms": 0.5772440053988248
+        }
+      ]
+    }
+  }
+}
